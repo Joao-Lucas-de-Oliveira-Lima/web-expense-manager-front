@@ -29,13 +29,14 @@ const App = () => {
 
   return (
     <Container
+      className="d-flex justify-content-center"
       maxWidth="sm"
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         minHeight: '100vh',
-        pt: 4,
+        paddingRight: 2, // Ajuste para mover para a direita
       }}
     >
       <Box

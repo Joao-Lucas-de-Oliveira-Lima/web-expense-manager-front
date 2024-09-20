@@ -9,7 +9,7 @@ const ExpenseForm = ({ onAddExpense }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && date && value) {
+    if (name && date && value >= 0) {
       onAddExpense({ name, date, value });
       setName('');
       setDate('');
@@ -38,6 +38,11 @@ const ExpenseForm = ({ onAddExpense }) => {
         }}
         value={date}
         onChange={(e) => setDate(e.target.value)}
+        sx={{
+          '& input::-webkit-calendar-picker-indicator': {
+            filter: 'invert(1)', // Torna o ícone preto
+          },
+        }}
       />
       <TextField
         label="Valor"
@@ -47,6 +52,9 @@ const ExpenseForm = ({ onAddExpense }) => {
         margin="normal"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        inputProps={{
+          min: 0, // Define o valor mínimo como 0
+        }}
       />
       <Button variant="contained" color="primary" type="submit">
         Adicionar Gasto
