@@ -1,3 +1,4 @@
+// src/components/ExpenseList.jsx
 import React from 'react';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Button, Typography } from '@mui/material';
 
@@ -8,10 +9,14 @@ const ExpenseList = ({ expenses, onRemoveExpense }) => {
     <div>
       <List>
         {expenses.map((expense, index) => (
-          <ListItem key={index}>
+          <ListItem key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <ListItemText
-              primary={`${expense.name} - R$ ${expense.value}`}
-              secondary={`Data: ${expense.date}`}
+              primary={
+                <Typography sx={{ color: 'black' }}>{`${expense.name} - R$ ${expense.value}`}</Typography>
+              }
+              secondary={
+                <Typography variant="body2" sx={{ color: 'black' }}>{`Data: ${expense.date}`}</Typography>
+              }
             />
             <ListItemSecondaryAction>
               <Button variant="outlined" color="secondary" onClick={() => onRemoveExpense(index)}>
@@ -21,7 +26,7 @@ const ExpenseList = ({ expenses, onRemoveExpense }) => {
           </ListItem>
         ))}
       </List>
-      <Typography variant="h6" component="div">
+      <Typography variant="h6" component="div" sx={{ marginTop: 2, color: 'black' }}>
         Total: R$ {total.toFixed(2)}
       </Typography>
     </div>

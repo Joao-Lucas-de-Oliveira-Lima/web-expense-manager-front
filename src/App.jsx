@@ -1,5 +1,6 @@
+// src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 
@@ -25,12 +26,33 @@ const App = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Registro de Gastos
-      </Typography>
-      <ExpenseForm onAddExpense={addExpense} />
-      <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        minHeight: '100vh',
+        pt: 4,
+      }}
+    >
+      <Box
+        sx={{
+          border: '2px solid #3f51b5',
+          borderRadius: '8px',
+          padding: 3,
+          boxShadow: 2,
+          backgroundColor: '#fff',
+          width: '100%',
+          maxWidth: '400px',
+        }}
+      >
+        <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
+          Registro de Gastos
+        </Typography>
+        <ExpenseForm onAddExpense={addExpense} />
+        <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
+      </Box>
     </Container>
   );
 };
