@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Box } from '@mui/material';
-import ExpenseForm from './components/ExpenseForm';
+import ExpenseForm from './components/AddExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import AlertMessage from './components/AlertMessage';
 
