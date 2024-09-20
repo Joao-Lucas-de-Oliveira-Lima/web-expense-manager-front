@@ -6,8 +6,8 @@ import AlertMessage from './components/AlertMessage';
 
 const App = () => {
   const [expenses, setExpenses] = useState([]);
-  const [showAlert, setShowAlert] = useState(false); // Estado para controlar a exibição do alerta
-  const [alertMessage, setAlertMessage] = useState(''); // Estado para armazenar a mensagem do alerta
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
     const savedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
@@ -19,16 +19,14 @@ const App = () => {
   }, [expenses]);
 
   const addExpense = (expense) => {
-    // Verificar se os campos estão vazios ou são valores padrões
     if (!expense.name || !expense.value || !expense.date) {
       setAlertMessage('Preencha todos os campos do formulário.');
-      setShowAlert(true); // Exibir o alerta
+      setShowAlert(true);
       return;
     }
   
-    // Se a validação passar, adiciona a despesa
     setExpenses([...expenses, expense]);
-    setShowAlert(false); // Ocultar o alerta quando o gasto for adicionado corretamente
+    setShowAlert(false);
   };
   
 
@@ -48,7 +46,7 @@ const App = () => {
         alignItems: 'center',
         minHeight: '100vh',
         pt: 4,
-        position: 'relative', // Necessário para posicionar o alerta
+        position: 'relative', 
       }}
     >
       <Box
@@ -68,15 +66,15 @@ const App = () => {
           Gerenciador de gastos
         </Typography>
 
-        {/* Formulário */}
+        {}
         <ExpenseForm onAddExpense={addExpense} />
 
-        {/* Lista de Gastos com Scroll */}
+        {}
         <Box sx={{ flexGrow: 1, overflowY: 'auto', mb: 2 }}>
           <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
         </Box>
 
-        {/* Valor Total fixo na parte inferior */}
+        {}
         <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 2 }}>
           <Typography variant="h6" component="div" sx={{ textAlign: 'right', color: 'black' }}>
             Total: R$ {total.toFixed(2)}
@@ -84,11 +82,11 @@ const App = () => {
         </Box>
       </Box>
 
-      {/* Exibir o alerta condicionalmente */}
+      {}
       {showAlert && (
         <AlertMessage
           message={alertMessage}
-          onClose={() => setShowAlert(false)} // Fechar o alerta
+          onClose={() => setShowAlert(false)}
         />
       )}
     </Container>

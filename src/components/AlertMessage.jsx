@@ -9,8 +9,8 @@ const AlertMessage = ({ message, onClose }) => {
         bottom: '20px',
         left: '20px',
         padding: '10px',
-        backgroundColor: '#f44336', // Cor de fundo vermelha para alertas
-        color: 'white', // Texto branco
+        backgroundColor: '#f44336',
+        color: 'white',
         borderRadius: '4px',
         boxShadow: 2,
       }}
