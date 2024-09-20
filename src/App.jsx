@@ -25,10 +25,12 @@ const App = () => {
       setShowAlert(true); // Exibir o alerta
       return;
     }
-
+  
+    // Se a validação passar, adiciona a despesa
     setExpenses([...expenses, expense]);
     setShowAlert(false); // Ocultar o alerta quando o gasto for adicionado corretamente
   };
+  
 
   const removeExpense = (index) => {
     const newExpenses = expenses.filter((_, i) => i !== index);
@@ -63,7 +65,7 @@ const App = () => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
-          Registro de Gastos
+          Gerenciador de gastos
         </Typography>
 
         {/* Formulário */}

@@ -2,22 +2,31 @@ import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
 const ExpenseForm = ({ onAddExpense }) => {
-  // Inicializar os campos com valores padrão
-  const [name, setName] = useState(''); // Padrão vazio
-  const [date, setDate] = useState(''); // Padrão vazio
-  const [value, setValue] = useState(''); // Padrão vazio
-
+  const [name, setName] = useState('');
+  const [date, setDate] = useState(''); 
+  const [value, setValue] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Chama a função onAddExpense com um objeto que pode ter valores vazios
     onAddExpense({ name, date, value });
-    
-    // Limpar o formulário após a submissão
+    if (name && date && value >= 0) {
+      setName('');
+      setDate('');
+      setValue('');
+    } else {
+      console.log('Preencha todos os campos corretamente.');
+    }
+  };
+
+  /*
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddExpense({ name, date, value });
     setName('');
     setDate('');
     setValue('');
   };
+  */
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
@@ -35,14 +44,16 @@ const ExpenseForm = ({ onAddExpense }) => {
         variant="outlined"
         fullWidth
         margin="normal"
-        InputLabelProps={{
-          shrink: true,
+        slotProps={{
+          inputLabel: {
+            shrink: date !== 'data',
+          },
         }}
         value={date}
         onChange={(e) => setDate(e.target.value)}
         sx={{
           '& input::-webkit-calendar-picker-indicator': {
-            filter: 'invert(1)', // Torna o ícone preto
+            filter: 'invert(1)',
           },
         }}
       />
@@ -55,7 +66,7 @@ const ExpenseForm = ({ onAddExpense }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         inputProps={{
-          min: 0, // Define o valor mínimo como 0
+          min: 0,
         }}
       />
       <Button variant="contained" color="primary" type="submit">

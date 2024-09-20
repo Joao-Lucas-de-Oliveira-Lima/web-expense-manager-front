@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
+import { List, ListItem, ListItemText, IconButton, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const ExpenseList = ({ expenses, onRemoveExpense }) => {
@@ -13,23 +13,41 @@ const ExpenseList = ({ expenses, onRemoveExpense }) => {
             key={index}
             sx={{
               display: 'flex',
-              justifyContent: 'space-between', 
-              overflow: 'hidden', // Previne o scroll horizontal
-              whiteSpace: 'nowrap', // Impede quebra de linha
-              textOverflow: 'ellipsis', // Adiciona "..." quando o texto é muito longo
-              maxWidth: '100%' // Limita a largura máxima do item
+              justifyContent: 'space-between',
+              maxWidth: '100%',
             }}
           >
             <ListItemText
-              primary={expense.name}
+              primary={
+                <Tooltip title={expense.name} arrow>
+                  <span
+                    style={{
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      display: 'inline-block',
+                      maxWidth: '70%',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {expense.name.length > 50 ? `${expense.name.slice(0, 40)}...` : expense.name}
+                  </span>
+                </Tooltip>
+              }
               secondary={`R$ ${parseFloat(expense.value).toFixed(2)} - ${expense.date}`}
-              sx={{ color: 'black' }} // Define a cor do texto como preto
+              sx={{ color: 'black' }}
             />
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="delete" onClick={() => onRemoveExpense(index)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            <IconButton edge="end" aria-label="delete" onClick={() => onRemoveExpense(index)}>
+              <DeleteIcon
+                sx={{
+                  cursor: 'pointer',
+                  color: 'black',
+                  '&:hover': {
+                    color: 'red',
+                  },
+                }}
+              />
+            </IconButton>
           </ListItem>
         ))}
       </List>
