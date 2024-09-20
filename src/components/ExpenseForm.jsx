@@ -1,20 +1,22 @@
-// src/components/ExpenseForm.jsx
 import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
 const ExpenseForm = ({ onAddExpense }) => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [value, setValue] = useState('');
+  // Inicializar os campos com valores padrão
+  const [name, setName] = useState(''); // Padrão vazio
+  const [date, setDate] = useState(''); // Padrão vazio
+  const [value, setValue] = useState(''); // Padrão vazio
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && date && value >= 0) {
-      onAddExpense({ name, date, value });
-      setName('');
-      setDate('');
-      setValue('');
-    }
+
+    // Chama a função onAddExpense com um objeto que pode ter valores vazios
+    onAddExpense({ name, date, value });
+    
+    // Limpar o formulário após a submissão
+    setName('');
+    setDate('');
+    setValue('');
   };
 
   return (

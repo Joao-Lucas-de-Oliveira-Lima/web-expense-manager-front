@@ -1,11 +1,13 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
+import AlertMessage from './components/AlertMessage';
 
 const App = () => {
   const [expenses, setExpenses] = useState([]);
+  const [showAlert, setShowAlert] = useState(false); // Estado para controlar a exibição do alerta
+  const [alertMessage, setAlertMessage] = useState(''); // Estado para armazenar a mensagem do alerta
 
   useEffect(() => {
     const savedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
@@ -17,7 +19,15 @@ const App = () => {
   }, [expenses]);
 
   const addExpense = (expense) => {
+    // Verificar se os campos estão vazios ou são valores padrões
+    if (!expense.name || !expense.value || !expense.date) {
+      setAlertMessage('Preencha todos os campos do formulário.');
+      setShowAlert(true); // Exibir o alerta
+      return;
+    }
+
     setExpenses([...expenses, expense]);
+    setShowAlert(false); // Ocultar o alerta quando o gasto for adicionado corretamente
   };
 
   const removeExpense = (index) => {
@@ -29,14 +39,14 @@ const App = () => {
 
   return (
     <Container
-      className="d-flex justify-content-center"
       maxWidth="sm"
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
-        paddingRight: 2, // Ajuste para mover para a direita
+        pt: 4,
+        position: 'relative', // Necessário para posicionar o alerta
       }}
     >
       <Box
@@ -52,15 +62,7 @@ const App = () => {
           flexDirection: 'column',
         }}
       >
-        <Typography
-          variant="h4"
-          component="h1"
-          gutterBottom
-          sx={{
-            color: 'black',
-            textAlign: 'center', // Centraliza o título no Box
-          }}
-        >
+        <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
           Registro de Gastos
         </Typography>
 
@@ -79,6 +81,14 @@ const App = () => {
           </Typography>
         </Box>
       </Box>
+
+      {/* Exibir o alerta condicionalmente */}
+      {showAlert && (
+        <AlertMessage
+          message={alertMessage}
+          onClose={() => setShowAlert(false)} // Fechar o alerta
+        />
+      )}
     </Container>
   );
 };
