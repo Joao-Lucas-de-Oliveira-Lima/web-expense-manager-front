@@ -1,5 +1,5 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
+import { Container, Typography } from '@mui/material';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 
@@ -25,11 +25,13 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Registro de Gastos</h1>
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Registro de Gastos
+      </Typography>
       <ExpenseForm onAddExpense={addExpense} />
       <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
-    </div>
+    </Container>
   );
 };
 

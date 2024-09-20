@@ -1,5 +1,5 @@
-// src/components/ExpenseForm.js
 import React, { useState } from 'react';
+import { TextField, Button, Box } from '@mui/material';
 
 const ExpenseForm = ({ onAddExpense }) => {
   const [name, setName] = useState('');
@@ -17,21 +17,40 @@ const ExpenseForm = ({ onAddExpense }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nome:</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label>Data:</label>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      </div>
-      <div>
-        <label>Valor:</label>
-        <input type="number" value={value} onChange={(e) => setValue(e.target.value)} />
-      </div>
-      <button type="submit">Adicionar Gasto</button>
-    </form>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
+      <TextField
+        label="Nome"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <TextField
+        label="Data"
+        type="date"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <TextField
+        label="Valor"
+        type="number"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button variant="contained" color="primary" type="submit">
+        Adicionar Gasto
+      </Button>
+    </Box>
   );
 };
 
