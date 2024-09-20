@@ -25,6 +25,8 @@ const App = () => {
     setExpenses(newExpenses);
   };
 
+  const total = expenses.reduce((acc, expense) => acc + parseFloat(expense.value), 0);
+
   return (
     <Container
       maxWidth="sm"
@@ -36,7 +38,6 @@ const App = () => {
         pt: 4,
       }}
     >
-      {/* Definindo altura máxima e rolagem para o contêiner do formulário e lista */}
       <Box
         sx={{
           border: '2px solid #3f51b5',
@@ -45,15 +46,29 @@ const App = () => {
           boxShadow: 2,
           backgroundColor: '#fff',
           width: '100%',
-          maxHeight: '500px',  // Altura máxima do contêiner
-          overflowY: 'auto',   // Barra de rolagem quando o conteúdo excede a altura
+          maxHeight: '500px',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
-          Gerenciador de gastos
+          Registro de Gastos
         </Typography>
+
+        {/* Formulário */}
         <ExpenseForm onAddExpense={addExpense} />
-        <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
+
+        {/* Lista de Gastos com Scroll */}
+        <Box sx={{ flexGrow: 1, overflowY: 'auto', mb: 2 }}>
+          <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
+        </Box>
+
+        {/* Valor Total fixo na parte inferior */}
+        <Box sx={{ borderTop: '1px solid #ccc', paddingTop: 2 }}>
+          <Typography variant="h6" component="div" sx={{ textAlign: 'right', color: 'black' }}>
+            Total: R$ {total.toFixed(2)}
+          </Typography>
+        </Box>
       </Box>
     </Container>
   );
