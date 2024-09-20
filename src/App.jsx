@@ -36,6 +36,7 @@ const App = () => {
         pt: 4,
       }}
     >
+      {/* Definindo altura máxima e rolagem para o contêiner do formulário e lista */}
       <Box
         sx={{
           border: '2px solid #3f51b5',
@@ -44,11 +45,12 @@ const App = () => {
           boxShadow: 2,
           backgroundColor: '#fff',
           width: '100%',
-          maxWidth: '400px',
+          maxHeight: '500px',  // Altura máxima do contêiner
+          overflowY: 'auto',   // Barra de rolagem quando o conteúdo excede a altura
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
-          Registro de Gastos
+          Gerenciador de gastos
         </Typography>
         <ExpenseForm onAddExpense={addExpense} />
         <ExpenseList expenses={expenses} onRemoveExpense={removeExpense} />
