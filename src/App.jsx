@@ -51,7 +51,15 @@ const App = () => {
           flexDirection: 'column',
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{
+            color: 'black',
+            textAlign: 'center', // Centraliza o título no Box
+          }}
+        >
           Registro de Gastos
         </Typography>
 
